@@ -7,7 +7,8 @@ const adminRoutes = require("./routes/admin");
 
 // Server setup
 const app = express();
-const server = app.listen(3000, () => console.log(`Server is Listening to ${3000}`));
+const PORT = process.env.PORT;
+const server = app.listen(PORT, () => console.log(`Server is Listening to ${PORT}`));
 
 app.set("view engine", ejs);
 app.use(express.static("public"));
