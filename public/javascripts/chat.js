@@ -1,4 +1,4 @@
-const socket = io.connect("localhost:3000");
+const socket = io.connect("https://chatty-mehedi.herokuapp.com/");
 
 // Doms
 const send_btn = document.getElementById("send"),
