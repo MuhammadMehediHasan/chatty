@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+    font-family: "Nunito";
+    margin: 0;
+    &::before {
+        box-sizing: border-box;
+    }
+
+    &::after {
+        box-sizing: border-box;
+    }
+}
+
+.container {
+    // padding: ;
+    &.center {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+.header {
+    font-size: 5.5em;
+    display: flex;
+    small {
+        font-size: .3em;
+        font-weight: lighter;
+        display: block;
+        transform: translate(-15%, 55%);
+    }
+
+    margin-bottom: 1em;
+}
+
+form.group {
+    // border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem;
+    font-size: 1.5em;
+}
+
+.chat_body {
+    max-height: 30vh;
+    background-color: #fafafa;
+    overflow-y: scroll;
+}
+
+.input_group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.server {
+    color: royalblue;
+}

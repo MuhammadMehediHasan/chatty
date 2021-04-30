@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head.ejs", {chat: true}) %>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Chat Room</div>
+
+        <div class="chat_body">
+            <div class="out" id="out"></div>
+            <div class="feedback" id="feedback"></div>
+        </div>
+
+        <div class="input_group">
+            <div class="item">
+                <input type="text" disabled value="<%= user_name %>" id="user_name">
+            </div>
+            <div class="item message">
+                <input type="text" id="message" placeholder="Enter Message Here ...">
+            </div>
+            <div class="item buttons">
+                <button id="send">Send</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

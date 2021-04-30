@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head.ejs", {chat:false}) %>
+
+<body>
+    <div class="header">Admin Panel</div>
+    <% if(admin) { %>
+
+
+
+    <div class="chat_body">
+        <div class="out" id="out"></div>
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <div class="input_group">
+        <div class="item">
+            <input type="text" disabled value="<%= user_name %>" id="user_name">
+        </div>
+        <div class="item message">
+            <input type="text" id="message" placeholder="Enter Message Here ...">
+        </div>
+        <div class="item buttons">
+            <button id="send">Send</button>
+        </div>
+
+        <script src="/socket.io/socket.io.min.js"></script>
+        <script>
+            let socket = io.connect("localhost:3000");
+
+            // Doms
+            const send_btn = document.getElementById("send"),
+                out = document.getElementById("out"),
+                user_name = document.getElementById("user_name"),
+                message = document.getElementById("message"),
+                feedback = document.getElementById("feedback");
+
+
+            // Data Receiver
+            socket.on("_reqUserName", (data) => {
+                if (data) {
+                    socket.emit("_userName", user_name.value);
+                    appendMessage("You have joined the Chat!");
+                }
+            })
+
+            socket.on("_userName", (data) => {
+                appendMessage(`${data} has joined the chat`);
+            })
+
+            socket.on("message", (data) => {
+                appendMessage(data.message, data.user_name, "chat")
+            })
+
+            // data sender
+
+            send_btn.addEventListener("click", () => {
+                if (message.value.trim())
+                    socket.emit("message", {
+                        message: message.value,
+                        user_name: user_name.value
+                    })
+            })
+
+            // Utils
+// Utils
+function appendMessage(message = "", name = "[Server]", className = "server") {
+        out.innerHTML += `<p><b class="${className}">${name}:</b> ${message}</p>`;
+}
+        </script>
+
+        <% } else { %>
+        <form action="/admin" class="input_group">
+            <input type="text" name="user_name" placeholder="User name">
+            <input type="password" placeholder="Enter your password ..." name="password">
+            <input type="submit">
+        </form>
+        <% } %>
+</body>
+
+</html>
